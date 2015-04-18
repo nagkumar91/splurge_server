@@ -39,6 +39,6 @@ class GiftCard(TimeStampedModel):
             return self.name
         else:
             return self.amount
-        
+
     class Meta:
         verbose_name_plural = "Gift Cards"
