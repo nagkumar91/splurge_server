@@ -18,11 +18,7 @@ MEDIA_URL = '/media/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'splurge',
-        'USER': 'splurge',
-        'PASSWORD': 'splurg3',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'splurge.db',
     }
 }
