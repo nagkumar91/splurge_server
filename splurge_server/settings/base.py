@@ -150,7 +150,6 @@ TEMPLATE_LOADERS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
     normpath(join(SITE_ROOT, 'templates')),
-    normpath(join(SITE_ROOT, 'ui', 'templates')),
 )
 ########## END TEMPLATE CONFIGURATION
 
@@ -246,7 +245,5 @@ WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 INSTALLED_APPS += (
     # Database migration helpers:
     'south',
-    'rest_framework',
     'core',
 )
-# Don't need to use South when setting up a test database.
