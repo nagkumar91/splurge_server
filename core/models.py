@@ -26,6 +26,15 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
+class Sender(models.Model):
+    name = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    email_id = models.CharField(max_length=50, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class GiftCard(TimeStampedModel):
     name = models.CharField(max_length=50, null=True, blank=True)
     amount = models.BigIntegerField()
@@ -33,6 +42,7 @@ class GiftCard(TimeStampedModel):
     used = models.BooleanField(default=False)
     recipient = models.ForeignKey(Recipient, related_name="giftcards", null=True)
     category = models.ForeignKey(Category, related_name="giftcards", null=True)
+    sender = models.ForeignKey(Sender, related_name="giftcards")
 
     def __unicode__(self):
         if self.name:

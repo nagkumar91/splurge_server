@@ -24,6 +24,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'core', ['Category'])
 
+        # Adding model 'Sender'
+        db.create_table(u'core_sender', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('phone_number', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
+            ('email_id', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'core', ['Sender'])
+
         # Adding model 'GiftCard'
         db.create_table(u'core_giftcard', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -35,6 +44,7 @@ class Migration(SchemaMigration):
             ('used', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('recipient', self.gf('django.db.models.fields.related.ForeignKey')(related_name='giftcards', null=True, to=orm['core.Recipient'])),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(related_name='giftcards', null=True, to=orm['core.Category'])),
+            ('sender', self.gf('django.db.models.fields.related.ForeignKey')(related_name='giftcards', to=orm['core.Sender'])),
         ))
         db.send_create_signal(u'core', ['GiftCard'])
 
@@ -45,6 +55,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Category'
         db.delete_table(u'core_category')
+
+        # Deleting model 'Sender'
+        db.delete_table(u'core_sender')
 
         # Deleting model 'GiftCard'
         db.delete_table(u'core_giftcard')
@@ -66,6 +79,7 @@ class Migration(SchemaMigration):
             'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'recipient': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'giftcards'", 'null': 'True', 'to': u"orm['core.Recipient']"}),
+            'sender': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'giftcards'", 'to': u"orm['core.Sender']"}),
             'used': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
         u'core.recipient': {
@@ -74,6 +88,13 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'phone_number': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+        },
+        u'core.sender': {
+            'Meta': {'object_name': 'Sender'},
+            'email_id': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'phone_number': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         }
     }
 
