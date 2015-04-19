@@ -1,8 +1,8 @@
 __author__ = 'nagkumar'
 from .base import *
 
-DEBUG = False
-ALLOWED_HOSTS = ['getsplurge.com', 'splurge.nagkumar.com']
+DEBUG = True
+# ALLOWED_HOSTS = ['getsplurge.com', 'splurge.nagkumar.com', '']
 
 CACHES = {
     'default': {
